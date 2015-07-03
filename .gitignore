@@ -28,3 +28,7 @@ TestResult.xml
 
 # Ignore NuGet packages (let package restore handle these)
 /packages/
+
+# Ignore TypeScript generated files.
+**/Scripts/*/*.js
+**/Scripts/*/*.js.map
