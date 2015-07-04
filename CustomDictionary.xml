@@ -5,6 +5,7 @@
     <Recognized>
       <Word>Git</Word>
       <Word>Mvc</Word>
+      <Word>pkt-line</Word>
     </Recognized>
     <Deprecated />
     <Compound />

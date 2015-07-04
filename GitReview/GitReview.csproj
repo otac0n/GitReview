@@ -105,6 +105,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResults\ProtocolUtils.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\bootstrap\badges.less" />
