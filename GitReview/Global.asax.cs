@@ -18,9 +18,12 @@ namespace GitReview
     /// </summary>
     public class GitReviewApplication : HttpApplication
     {
-        public static string RepositoriesPath
+        /// <summary>
+        /// Gets the path of the shared repository.
+        /// </summary>
+        public static string RepositoryPath
         {
-            get { return ConfigurationManager.AppSettings["RepositoriesPath"]; }
+            get { return ConfigurationManager.AppSettings["RepositoryPath"]; }
         }
 
         /// <summary>
