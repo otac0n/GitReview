@@ -8,6 +8,7 @@
 
 namespace GitReview
 {
+    using System.Configuration;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -15,8 +16,13 @@ namespace GitReview
     /// <summary>
     /// The GitReview application.
     /// </summary>
-    public class MvcApplication : HttpApplication
+    public class GitReviewApplication : HttpApplication
     {
+        public static string RepositoriesPath
+        {
+            get { return ConfigurationManager.AppSettings["RepositoriesPath"]; }
+        }
+
         /// <summary>
         /// Starts the application.
         /// </summary>
