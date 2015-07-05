@@ -26,6 +26,8 @@ namespace GitReview
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("Home", "", new { controller = "Home", action = "Index" });
+            routes.MapRoute("Upload InfoRefs", "new/info/refs", new { controller = "Upload", action = "InfoRefs" });
+            routes.MapRoute("Upload ReceivePack", "new/git-receive-pack", new { controller = "Upload", action = "ReceivePack" });
         }
     }
 }
