@@ -22,6 +22,14 @@ namespace GitReview
     public class GitReviewApplication : HttpApplication
     {
         /// <summary>
+        /// Gets the path to the git command line executable.
+        /// </summary>
+        public static string GitPath
+        {
+            get { return ConfigurationManager.AppSettings["GitPath"]; }
+        }
+
+        /// <summary>
         /// Gets the path of the shared repository.
         /// </summary>
         public static string RepositoryPath
