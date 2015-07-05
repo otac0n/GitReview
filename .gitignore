@@ -32,3 +32,6 @@ TestResult.xml
 # Ignore TypeScript generated files.
 **/Scripts/*/*.js
 **/Scripts/*/*.js.map
+
+# Ignore app data.
+App_Data/
