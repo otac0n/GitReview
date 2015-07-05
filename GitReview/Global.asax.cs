@@ -9,9 +9,12 @@
 namespace GitReview
 {
     using System.Configuration;
+    using System.IO;
     using System.Web;
+    using System.Web.Hosting;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using LibGit2Sharp;
 
     /// <summary>
     /// The GitReview application.
@@ -23,7 +26,7 @@ namespace GitReview
         /// </summary>
         public static string RepositoryPath
         {
-            get { return ConfigurationManager.AppSettings["RepositoryPath"]; }
+            get { return HostingEnvironment.MapPath(ConfigurationManager.AppSettings["RepositoryPath"]); }
         }
 
         /// <summary>
@@ -33,6 +36,12 @@ namespace GitReview
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            var path = GitReviewApplication.RepositoryPath;
+            if (!Directory.Exists(path))
+            {
+                Repository.Init(path, isBare: true);
+            }
         }
     }
 }
