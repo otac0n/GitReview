@@ -136,9 +136,11 @@
     <Compile Include="ActionResults\ReceivePackResult.cs" />
     <Content Include="App\app.js" />
     <Content Include="App\controllers\application.js" />
+    <Content Include="App\models\Review.js" />
     <Content Include="App\router.js" />
     <Content Include="App\templates\application.hbs" />
     <Content Include="App\templates\index.hbs" />
+    <Content Include="App\templates\review.hbs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -219,6 +221,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
@@ -268,7 +271,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\models\" />
     <Folder Include="App\routes\" />
     <Folder Include="App\views\" />
     <Folder Include="App_Data\" />
