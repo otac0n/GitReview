@@ -13,6 +13,7 @@ namespace GitReview
     using System.Web;
     using System.Web.Hosting;
     using System.Web.Mvc;
+    using System.Web.Optimization;
     using System.Web.Routing;
     using LibGit2Sharp;
 
@@ -44,6 +45,7 @@ namespace GitReview
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             var path = GitReviewApplication.RepositoryPath;
             if (!Directory.Exists(path))
