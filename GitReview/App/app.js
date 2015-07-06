@@ -1,2 +1,1 @@
-﻿App = Ember.Application.extend({
-});
+﻿App = Ember.Application.create();
