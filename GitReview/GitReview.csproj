@@ -201,6 +201,23 @@
     </Compile>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Ember-1.13.2\ember.debug.js" />
+    <Content Include="Scripts\Ember-1.13.2\ember.js" />
+    <Content Include="Scripts\Ember-1.13.2\ember.min.js" />
+    <Content Include="Scripts\Ember-1.13.2\ember.prod.js" />
+    <Content Include="Scripts\Ember-1.13.2\ember-template-compiler.js" />
+    <Content Include="Scripts\Ember-Data-1.13.2\ember-data.js" />
+    <Content Include="Scripts\Ember-Data-1.13.2\ember-data.js.map" />
+    <Content Include="Scripts\Ember-Data-1.13.2\ember-data.min.js" />
+    <Content Include="Scripts\Ember-Data-1.13.2\ember-data.prod.js" />
+    <Content Include="Scripts\handlebars.amd.js" />
+    <Content Include="Scripts\handlebars.amd.min.js" />
+    <Content Include="Scripts\handlebars.js" />
+    <Content Include="Scripts\handlebars.min.js" />
+    <Content Include="Scripts\handlebars.runtime.amd.js" />
+    <Content Include="Scripts\handlebars.runtime.amd.min.js" />
+    <Content Include="Scripts\handlebars.runtime.js" />
+    <Content Include="Scripts\handlebars.runtime.min.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
