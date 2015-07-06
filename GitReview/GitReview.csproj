@@ -121,6 +121,11 @@
     <Compile Include="ActionResults\AdvertiseRefsResult.cs" />
     <Compile Include="ActionResults\ProtocolUtils.cs" />
     <Compile Include="ActionResults\ReceivePackResult.cs" />
+    <Content Include="App\app.js" />
+    <Content Include="App\controllers\application.js" />
+    <Content Include="App\router.js" />
+    <Content Include="App\templates\application.hbs" />
+    <Content Include="App\templates\index.hbs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\bootstrap\alerts.less" />
@@ -249,6 +254,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\models\" />
+    <Folder Include="App\routes\" />
+    <Folder Include="App\views\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

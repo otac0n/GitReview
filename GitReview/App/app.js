@@ -1,0 +1,2 @@
+﻿App = Ember.Application.extend({
+});

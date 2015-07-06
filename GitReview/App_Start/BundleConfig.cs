@@ -27,7 +27,16 @@ namespace GitReview
             bundles.Add(new ScriptBundle("~/bundles/ember")
                 .Include("~/scripts/handlebars.js")
                 .IncludeDirectory("~/scripts", "ember.js", true)
+                .IncludeDirectory("~/scripts", "ember-template-compiler.js", true)
                 .IncludeDirectory("~/scripts", "ember-data.js", true));
+
+            bundles.Add(new ScriptBundle("~/bundles/app")
+                .Include("~/app/app.js")
+                .Include("~/app/router.js")
+                .IncludeDirectory("~/app/controllers", "*.js")
+                .IncludeDirectory("~/app/models", "*.js")
+                .IncludeDirectory("~/app/routes", "*.js")
+                .IncludeDirectory("~/app/views", "*.js"));
         }
     }
 }

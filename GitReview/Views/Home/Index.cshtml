@@ -1,2 +1,14 @@
 ﻿@section scripts {
+
+@Scripts.Render("~/bundles/ember")
+@Scripts.Render("~/bundles/app")
+<script>new App();</script>
+
+}
+
+@foreach (var template in Directory.EnumerateFiles(Server.MapPath("~/app/templates"), "*.hbs"))
+{
+
+<script type="text/x-handlebars" data-template-name="@Path.GetFileNameWithoutExtension(template)">@Html.Raw(File.ReadAllText(template))</script>
+
 }
