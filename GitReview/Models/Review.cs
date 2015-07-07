@@ -8,6 +8,8 @@
 
 namespace GitReview.Models
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Represents a code review.
     /// </summary>
@@ -17,5 +19,11 @@ namespace GitReview.Models
         /// Gets or sets the unique identifier of the code review.
         /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the prefix for all refs that are contained in the code review.
+        /// </summary>
+        [JsonIgnore]
+        public string RefPrefix { get; set; }
     }
 }

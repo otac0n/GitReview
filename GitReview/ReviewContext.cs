@@ -10,6 +10,7 @@ namespace GitReview
 {
     using System.Data.Entity;
     using System.Threading.Tasks;
+    using GitReview.Models;
 
     /// <summary>
     /// Repository containing review data.
@@ -23,6 +24,11 @@ namespace GitReview
             : base("GitReview.Database")
         {
         }
+
+        /// <summary>
+        /// Gets or sets the collection of reviews.
+        /// </summary>
+        public DbSet<Review> Reviews { get; set; }
 
         /// <summary>
         /// Gets the next available review ID.

@@ -18,6 +18,7 @@ namespace GitReview.ActionResults
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
+    using GitReview.Models;
     using LibGit2Sharp;
 
     /// <summary>
@@ -253,7 +254,12 @@ namespace GitReview.ActionResults
                 {
                     name = Task.Factory.StartNew(() => ctx.GetNextReviewId().Result).Result;
 
-                    // TODO: Create the code review.
+                    ctx.Reviews.Add(new Review
+                    {
+                        Id = name,
+                        RefPrefix = id,
+                    });
+                    ctx.SaveChanges();
                 }
 
                 if (useSideBand)

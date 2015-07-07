@@ -54,6 +54,7 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Build Include="ReviewId.sql" />
+    <Build Include="Review.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties" />
