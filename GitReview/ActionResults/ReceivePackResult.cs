@@ -103,10 +103,8 @@ namespace GitReview.ActionResults
             return errors;
         }
 
-        private static void ReportFailure(HttpResponseBase response, int? reportBand, Dictionary<ProtocolUtils.UpdateRequest, string> errors, string message = null)
+        private static void ReportFailure(HttpResponseBase response, int? reportBand, Dictionary<ProtocolUtils.UpdateRequest, string> errors, string message)
         {
-            message = message ?? "expected source and destination branches to be pushed";
-
             if (reportBand == ProtocolUtils.ErrorBand)
             {
                 response.BinaryWrite(ProtocolUtils.Band(ProtocolUtils.MessageBand,
@@ -220,7 +218,7 @@ namespace GitReview.ActionResults
                 {
                     if (reportStatus || useSideBand)
                     {
-                        ReportFailure(response, reportStatus ? reportBand : ProtocolUtils.ErrorBand, errors);
+                        ReportFailure(response, reportStatus ? reportBand : ProtocolUtils.ErrorBand, errors, "expected source and destination branches to be pushed");
                     }
 
                     return;
@@ -255,7 +253,7 @@ namespace GitReview.ActionResults
 
                 if (useSideBand)
                 {
-                    var url = new UrlHelper(context.RequestContext).Action("Index", "Home", null, context.HttpContext.Request.Url.Scheme) + "#" + name;
+                    var url = new UrlHelper(context.RequestContext).Action("Index", "Home", null, context.HttpContext.Request.Url.Scheme) + "#/" + name;
                     var message = string.Format("code review created:\n\n\t{0}\n\n", url);
                     response.BinaryWrite(ProtocolUtils.Band(ProtocolUtils.MessageBand, Encoding.UTF8.GetBytes(message)));
                 }
