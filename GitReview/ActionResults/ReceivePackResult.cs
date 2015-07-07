@@ -26,10 +26,8 @@ namespace GitReview.ActionResults
     /// </summary>
     public class ReceivePackResult : ActionResult
     {
-        private const string DestinationRefActual = "refs/heads/reviews/{id}/{version}/destination";
         private const string DestinationRefName = "refs/heads/destination";
         private const string Service = "git-receive-pack";
-        private const string SourceRefActual = "refs/heads/reviews/{id}/{version}/source";
         private const string SourceRefName = "refs/heads/source";
         private Repository repo;
 
@@ -229,11 +227,11 @@ namespace GitReview.ActionResults
                 source = new ProtocolUtils.UpdateRequest(
                     source.SourceIdentifier,
                     source.TargetIdentifier,
-                    SourceRefActual.Replace("{id}", id).Replace("{version}", "1"));
+                    RepoFormat.SourceRef.Replace("{id}", id).Replace("{version}", "1"));
                 destination = new ProtocolUtils.UpdateRequest(
                     destination.SourceIdentifier,
                     destination.TargetIdentifier,
-                    DestinationRefActual.Replace("{id}", id).Replace("{version}", "1"));
+                    RepoFormat.DestinationRef.Replace("{id}", id).Replace("{version}", "1"));
 
                 var output = this.ReadPack(new[] { source, destination }, capabilities, input);
                 var line = ProtocolUtils.ReadPacketLine(output).TrimEnd('\n');
