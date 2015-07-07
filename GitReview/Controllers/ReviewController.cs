@@ -9,6 +9,7 @@
 namespace GitReview.Controllers
 {
     using System.Web.Http;
+    using GitReview.Models;
 
     /// <summary>
     /// Provides an API for working with reviews.
@@ -27,7 +28,7 @@ namespace GitReview.Controllers
             {
                 Reviews = new[]
                 {
-                    new { Id = id }
+                    new Review { Id = id },
                 }
             };
         }
