@@ -248,8 +248,13 @@ namespace GitReview.ActionResults
                     return;
                 }
 
-                // TODO: Create the code review.
-                var name = "cr0000";
+                string name;
+                using (var ctx = new ReviewContext())
+                {
+                    name = Task.Factory.StartNew(() => ctx.GetNextReviewId().Result).Result;
+
+                    // TODO: Create the code review.
+                }
 
                 if (useSideBand)
                 {
