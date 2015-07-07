@@ -227,11 +227,11 @@ namespace GitReview.ActionResults
                 source = new ProtocolUtils.UpdateRequest(
                     source.SourceIdentifier,
                     source.TargetIdentifier,
-                    RepoFormat.SourceRef.Replace("{id}", id).Replace("{version}", "1"));
+                    RepoFormat.FormatSourceRef(id, 1));
                 destination = new ProtocolUtils.UpdateRequest(
                     destination.SourceIdentifier,
                     destination.TargetIdentifier,
-                    RepoFormat.DestinationRef.Replace("{id}", id).Replace("{version}", "1"));
+                    RepoFormat.FormatDestinationRef(id, 1));
 
                 var output = this.ReadPack(new[] { source, destination }, capabilities, input);
                 var line = ProtocolUtils.ReadPacketLine(output).TrimEnd('\n');
