@@ -8,8 +8,6 @@
 
 namespace GitReview.Models
 {
-    using Newtonsoft.Json;
-
     /// <summary>
     /// Represents a code review.
     /// </summary>
@@ -23,7 +21,6 @@ namespace GitReview.Models
         /// <summary>
         /// Gets or sets the prefix for all refs that are contained in the code review.
         /// </summary>
-        [JsonIgnore]
         public string RefPrefix { get; set; }
     }
 }

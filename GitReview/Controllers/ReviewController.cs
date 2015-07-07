@@ -8,9 +8,13 @@
 
 namespace GitReview.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using GitReview.Models;
+    using LibGit2Sharp;
 
     /// <summary>
     /// Provides an API for working with reviews.
@@ -33,9 +37,27 @@ namespace GitReview.Controllers
                     throw new HttpResponseException(HttpStatusCode.NotFound);
                 }
 
+                List<Revision> revisions;
+                using (var repo = new Repository(GitReviewApplication.RepositoryPath))
+                {
+                    revisions = repo.GetRevisions(review.RefPrefix).ToList();
+                }
+
                 return new
                 {
-                    Reviews = new[] { review },
+                    Reviews = new[]
+                    {
+                        new
+                        {
+                            Id = review.Id,
+                            Revisions = revisions.Select(r => new
+                            {
+                                Id = r.Id,
+                                Source = r.Source.TargetIdentifier,
+                                Destination = r.Destination.TargetIdentifier,
+                            }).ToList(),
+                        },
+                    },
                 };
             }
         }
