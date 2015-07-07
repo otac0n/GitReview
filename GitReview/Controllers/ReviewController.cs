@@ -8,8 +8,9 @@
 
 namespace GitReview.Controllers
 {
+    using System.Net;
+    using System.Threading.Tasks;
     using System.Web.Http;
-    using GitReview.Models;
 
     /// <summary>
     /// Provides an API for working with reviews.
@@ -22,15 +23,21 @@ namespace GitReview.Controllers
         /// <param name="id">The ID of the review to find.</param>
         /// <returns>The specified review.</returns>
         [Route("reviews/{id}")]
-        public object Get(string id)
+        public async Task<object> Get(string id)
         {
-            return new
+            using (var ctx = new ReviewContext())
             {
-                Reviews = new[]
+                var review = await ctx.Reviews.FindAsync(id);
+                if (review == null)
                 {
-                    new Review { Id = id },
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
                 }
-            };
+
+                return new
+                {
+                    Reviews = new[] { review },
+                };
+            }
         }
     }
 }
