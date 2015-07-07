@@ -6,6 +6,7 @@
 *.orig
 
 # Ignore all Visual Studio generated files.
+*.dbmdl
 *.sln.ide/
 *.suo
 *.user

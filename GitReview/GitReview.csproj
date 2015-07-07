@@ -276,6 +276,12 @@
     <Folder Include="App\views\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GitReview.Database\GitReview.Database.sqlproj">
+      <Project>{e6ebda2f-73d6-4edb-9cc5-46be2dada574}</Project>
+      <Name>GitReview.Database</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
