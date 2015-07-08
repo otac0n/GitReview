@@ -16,6 +16,7 @@ namespace GitReview.ActionResults
     using System.IO.Compression;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
@@ -254,7 +255,10 @@ namespace GitReview.ActionResults
                 {
                     using (var ctx = new ReviewContext())
                     {
-                        id = Task.Factory.StartNew(() => ctx.GetNextReviewId().Result).Result;
+                        using (new NoSyncScope())
+                        {
+                            id = ctx.GetNextReviewId().Result;
+                        }
 
                         ctx.Reviews.Add(new Review
                         {
@@ -288,6 +292,22 @@ namespace GitReview.ActionResults
                 {
                     response.BinaryWrite(ProtocolUtils.EndMarker);
                 }
+            }
+        }
+
+        private class NoSyncScope : IDisposable
+        {
+            private readonly SynchronizationContext original;
+
+            public NoSyncScope()
+            {
+                this.original = SynchronizationContext.Current;
+                SynchronizationContext.SetSynchronizationContext(null);
+            }
+
+            public void Dispose()
+            {
+                SynchronizationContext.SetSynchronizationContext(this.original);
             }
         }
     }
