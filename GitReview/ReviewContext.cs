@@ -36,7 +36,7 @@ namespace GitReview
         /// <returns>A string containing a unique review ID.</returns>
         public async Task<string> GetNextReviewId()
         {
-            var seq = await this.Database.SqlQuery<long>("SELECT NEXT VALUE FOR [ReviewId]").SingleAsync();
+            var seq = await this.Database.SqlQuery<long>("SELECT NEXT VALUE FOR [ReviewIds]").SingleAsync();
             return seq.ToString(@"\c\r0000");
         }
     }

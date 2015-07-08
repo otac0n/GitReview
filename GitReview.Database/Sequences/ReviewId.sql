@@ -1,1 +1,0 @@
-﻿CREATE SEQUENCE [dbo].[ReviewId] START WITH 1
