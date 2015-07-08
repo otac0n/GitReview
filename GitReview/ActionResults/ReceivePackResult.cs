@@ -160,7 +160,7 @@ namespace GitReview.ActionResults
             var output = new MemoryStream();
             using (var git = Process.Start(startInfo))
             {
-                var t = Task.Factory.StartNew(() =>
+                var outputTask = Task.Factory.StartNew(() =>
                 {
                     git.StandardOutput.BaseStream.CopyTo(output);
                 });
@@ -190,6 +190,7 @@ namespace GitReview.ActionResults
                 input.CopyTo(git.StandardInput.BaseStream);
                 git.StandardInput.Close();
                 git.WaitForExit();
+                outputTask.Wait();
             }
 
             output.Seek(0, SeekOrigin.Begin);
