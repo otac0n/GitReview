@@ -207,6 +207,7 @@ namespace GitReview.ActionResults
             var reportStatus = capabilities.Contains("report-status");
             var useSideBand = capabilities.Contains("side-band-64k");
             var reportBand = useSideBand ? ProtocolUtils.PrimaryBand : (int?)null;
+            var failureBand = reportStatus ? reportBand : ProtocolUtils.ErrorBand;
 
             try
             {
@@ -217,7 +218,7 @@ namespace GitReview.ActionResults
                 {
                     if (reportStatus || useSideBand)
                     {
-                        ReportFailure(response, reportStatus ? reportBand : ProtocolUtils.ErrorBand, errors, "expected source and destination branches to be pushed");
+                        ReportFailure(response, failureBand, errors, "expected source and destination branches to be pushed");
                     }
 
                     return;
@@ -241,7 +242,7 @@ namespace GitReview.ActionResults
 
                     if (reportStatus || useSideBand)
                     {
-                        ReportFailure(response, reportStatus ? reportBand : ProtocolUtils.ErrorBand, errors, line);
+                        ReportFailure(response, failureBand, errors, line);
                     }
 
                     return;
