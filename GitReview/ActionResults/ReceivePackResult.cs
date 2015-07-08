@@ -10,6 +10,7 @@ namespace GitReview.ActionResults
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity.Infrastructure;
     using System.Diagnostics;
     using System.IO;
     using System.IO.Compression;
@@ -249,16 +250,24 @@ namespace GitReview.ActionResults
                 }
 
                 string id;
-                using (var ctx = new ReviewContext())
+                try
                 {
-                    id = Task.Factory.StartNew(() => ctx.GetNextReviewId().Result).Result;
-
-                    ctx.Reviews.Add(new Review
+                    using (var ctx = new ReviewContext())
                     {
-                        Id = id,
-                        RefPrefix = refPrefix,
-                    });
-                    ctx.SaveChanges();
+                        id = Task.Factory.StartNew(() => ctx.GetNextReviewId().Result).Result;
+
+                        ctx.Reviews.Add(new Review
+                        {
+                            Id = id,
+                            RefPrefix = refPrefix,
+                        });
+                        ctx.SaveChanges();
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    ReportFailure(response, failureBand, errors, ex.GetBaseException().Message);
+                    throw;
                 }
 
                 if (useSideBand)
