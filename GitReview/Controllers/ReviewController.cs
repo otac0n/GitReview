@@ -45,18 +45,15 @@ namespace GitReview.Controllers
 
                 return new
                 {
-                    Reviews = new[]
+                    Review = new
                     {
-                        new
+                        Id = review.Id,
+                        Revisions = revisions.Select(r => new
                         {
-                            Id = review.Id,
-                            Revisions = revisions.Select(r => new
-                            {
-                                Id = r.Id,
-                                Source = r.Source.TargetIdentifier,
-                                Destination = r.Destination.TargetIdentifier,
-                            }).ToList(),
-                        },
+                            Id = r.Id,
+                            Source = r.Source.TargetIdentifier,
+                            Destination = r.Destination.TargetIdentifier,
+                        }).ToList(),
                     },
                 };
             }
