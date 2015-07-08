@@ -1,0 +1,2 @@
+﻿TRUNCATE TABLE [Reviews]
+ALTER SEQUENCE [ReviewIds] RESTART
