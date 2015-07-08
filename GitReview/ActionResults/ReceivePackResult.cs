@@ -223,15 +223,15 @@ namespace GitReview.ActionResults
                     return;
                 }
 
-                var id = Guid.NewGuid().ToString();
+                var refPrefix = Guid.NewGuid().ToString();
                 source = new ProtocolUtils.UpdateRequest(
                     source.SourceIdentifier,
                     source.TargetIdentifier,
-                    RepoFormat.FormatSourceRef(id, 1));
+                    RepoFormat.FormatSourceRef(refPrefix, 1));
                 destination = new ProtocolUtils.UpdateRequest(
                     destination.SourceIdentifier,
                     destination.TargetIdentifier,
-                    RepoFormat.FormatDestinationRef(id, 1));
+                    RepoFormat.FormatDestinationRef(refPrefix, 1));
 
                 var output = this.ReadPack(new[] { source, destination }, capabilities, input);
                 var line = ProtocolUtils.ReadPacketLine(output).TrimEnd('\n');
@@ -247,22 +247,22 @@ namespace GitReview.ActionResults
                     return;
                 }
 
-                string name;
+                string id;
                 using (var ctx = new ReviewContext())
                 {
-                    name = Task.Factory.StartNew(() => ctx.GetNextReviewId().Result).Result;
+                    id = Task.Factory.StartNew(() => ctx.GetNextReviewId().Result).Result;
 
                     ctx.Reviews.Add(new Review
                     {
-                        Id = name,
-                        RefPrefix = id,
+                        Id = id,
+                        RefPrefix = refPrefix,
                     });
                     ctx.SaveChanges();
                 }
 
                 if (useSideBand)
                 {
-                    var url = new UrlHelper(context.RequestContext).Action("Index", "Home", null, context.HttpContext.Request.Url.Scheme) + "#/" + name;
+                    var url = new UrlHelper(context.RequestContext).Action("Index", "Home", null, context.HttpContext.Request.Url.Scheme) + "#/" + id;
                     var message = string.Format("code review created:\n\n\t{0}\n\n", url);
                     response.BinaryWrite(ProtocolUtils.Band(ProtocolUtils.MessageBand, Encoding.UTF8.GetBytes(message)));
                 }
