@@ -8,6 +8,7 @@
 
 namespace GitReview.ActionResults
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -18,7 +19,7 @@ namespace GitReview.ActionResults
     /// <summary>
     /// Advertises an empty set of refs to smart http clients.
     /// </summary>
-    public class AdvertiseRefsResult : ActionResult
+    public class AdvertiseRefsResult : ActionResult, IDisposable
     {
         private readonly Repository repo;
         private readonly string service;
@@ -32,6 +33,18 @@ namespace GitReview.ActionResults
         {
             this.service = service;
             this.repo = repo;
+        }
+
+        ~AdvertiseRefsResult()
+        {
+            this.Dispose();
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            this.repo.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         /// <inheritdoc />

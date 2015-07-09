@@ -26,7 +26,7 @@ namespace GitReview.ActionResults
     /// <summary>
     /// Accepts objects from the client over the current HTTP connection.
     /// </summary>
-    public class ReceivePackResult : ActionResult
+    public class ReceivePackResult : ActionResult, IDisposable
     {
         private const string DestinationRefName = "refs/heads/destination";
         private const string Service = "git-receive-pack";
@@ -42,12 +42,24 @@ namespace GitReview.ActionResults
             this.repo = repo;
         }
 
+        ~ReceivePackResult()
+        {
+            this.Dispose();
+        }
+
         /// <summary>
         /// Gets the capabilities of this service.
         /// </summary>
         public static string Capabilities
         {
             get { return "atomic report-status side-band-64k"; }
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            this.repo.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         /// <inheritdoc />
