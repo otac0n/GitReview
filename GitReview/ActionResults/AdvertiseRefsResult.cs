@@ -73,7 +73,7 @@ namespace GitReview.ActionResults
 
             if (first)
             {
-                var line = string.Format("{0} capabilities^{}\0{1}\n", ProtocolUtils.ZeroId, this.GetCapabilities());
+                var line = string.Format("{0} capabilities^{{}}\0{1}\n", ProtocolUtils.ZeroId, this.GetCapabilities());
 
                 response.BinaryWrite(ProtocolUtils.PacketLine(line));
             }
