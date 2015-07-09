@@ -5,6 +5,9 @@ $repo = ($webConfig.configuration.appSettings.add | ?{ $_.key -eq 'RepositoryPat
 "Repo: $repo"
 "DB: $db"
 "Git: $git"
+
+./Install.ps1
+
 ""
 
 & $git init --bare $repo
