@@ -75,20 +75,21 @@ namespace GitReview.Controllers
                         Review = new
                         {
                             Id = review.Id,
-                            Revisions = revisions.Select(r => new
-                            {
-                                Id = r.Id,
-                                Source = r.Source.TargetIdentifier,
-                                Destination = r.Destination.TargetIdentifier,
-                            }).ToList(),
-                            Commits = commits.Select(c => new
-                            {
-                                Id = c.Sha,
-                                c.Author,
-                                c.Committer,
-                                c.Message,
-                            }).ToList(),
+                            Revisions = revisions.Select(r => review.Id + ":" + r.Id)
                         },
+                        Revisions = revisions.Select(r => new
+                        {
+                            Id = review.Id + ":" + r.Id,
+                            Source = r.Source.TargetIdentifier,
+                            Destination = r.Destination.TargetIdentifier,
+                        }).ToList(),
+                        Commits = commits.Select(c => new
+                        {
+                            Id = c.Sha,
+                            Author = c.Author.Email,
+                            Committer = c.Committer.Email,
+                            Message = c.Message,
+                        }).ToList(),
                     };
                 }
             }
