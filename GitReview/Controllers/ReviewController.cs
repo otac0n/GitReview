@@ -38,24 +38,59 @@ namespace GitReview.Controllers
                 }
 
                 List<Revision> revisions;
+                var commits = new HashSet<Commit>();
                 using (var repo = new Repository(GitReviewApplication.RepositoryPath))
                 {
                     revisions = repo.GetRevisions(review.RefPrefix).ToList();
-                }
-
-                return new
-                {
-                    Review = new
+                    foreach (var rev in revisions)
                     {
-                        Id = review.Id,
-                        Revisions = revisions.Select(r => new
+                        var sourceCommit = (Commit)rev.Source.Target;
+                        var destinationCommit = (Commit)rev.Destination.Target;
+
+                        commits.Add(sourceCommit);
+                        commits.Add(destinationCommit);
+
+                        var mergeBase = repo.Commits.FindMergeBase(sourceCommit, destinationCommit);
+                        if (mergeBase == null)
                         {
-                            Id = r.Id,
-                            Source = r.Source.TargetIdentifier,
-                            Destination = r.Destination.TargetIdentifier,
-                        }).ToList(),
-                    },
-                };
+                            continue;
+                        }
+
+                        commits.Add(mergeBase);
+
+                        var between = repo.Commits.QueryBy(new CommitFilter
+                        {
+                            Since = new[] { sourceCommit, destinationCommit },
+                            Until = mergeBase,
+                        });
+
+                        if (between != null)
+                        {
+                            commits.UnionWith(between);
+                        }
+                    }
+
+                    return new
+                    {
+                        Review = new
+                        {
+                            Id = review.Id,
+                            Revisions = revisions.Select(r => new
+                            {
+                                Id = r.Id,
+                                Source = r.Source.TargetIdentifier,
+                                Destination = r.Destination.TargetIdentifier,
+                            }).ToList(),
+                            Commits = commits.Select(c => new
+                            {
+                                Id = c.Sha,
+                                c.Author,
+                                c.Committer,
+                                c.Message,
+                            }).ToList(),
+                        },
+                    };
+                }
             }
         }
     }
