@@ -6,9 +6,15 @@
 
 }
 
-@foreach (var template in Directory.EnumerateFiles(Server.MapPath("~/app/templates"), "*.hbs"))
-{
-
-<script type="text/x-handlebars" data-template-name="@Path.GetFileNameWithoutExtension(template)">@Html.Raw(File.ReadAllText(template))</script>
-
+@{
+    var root = Server.MapPath("~/app/templates/");
+    var rootUri = new Uri(root);
+    foreach (var template in Directory.EnumerateFiles(root, "*.hbs", SearchOption.AllDirectories))
+    {
+        var relative = Uri.UnescapeDataString(rootUri.MakeRelativeUri(new Uri(template)).ToString());
+        var templateName = relative.Substring(0, relative.Length - ".hbs".Length);
+<script type="text/x-handlebars" data-template-name="@templateName">
+@Html.Raw(File.ReadAllText(template))
+</script>
+    }
 }
