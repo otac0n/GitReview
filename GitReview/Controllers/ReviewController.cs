@@ -89,6 +89,7 @@ namespace GitReview.Controllers
                             Author = c.Author.Email,
                             Committer = c.Committer.Email,
                             Message = c.Message,
+                            Parents = c.Parents.Select(p => p.Sha).ToList(),
                         }).ToList(),
                     };
                 }
