@@ -30,6 +30,9 @@ namespace GitReview
                 .IncludeDirectory("~/scripts", "ember-template-compiler.js", true)
                 .IncludeDirectory("~/scripts", "ember-data.js", true));
 
+            bundles.Add(new ScriptBundle("~/bundles/moment")
+                .Include("~/scripts/moment-with-locales.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/app")
                 .Include("~/app/app.js")
                 .Include("~/app/router.js")
