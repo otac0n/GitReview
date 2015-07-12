@@ -42,6 +42,8 @@ namespace GitReview.Controllers
                 using (var repo = new Repository(GitReviewApplication.RepositoryPath))
                 {
                     revisions = repo.GetRevisions(review.RefPrefix).ToList();
+                    var mergeBases = new Dictionary<Revision, Commit[]>(revisions.Count);
+
                     foreach (var rev in revisions)
                     {
                         var sourceCommit = (Commit)rev.Source.Target;
@@ -53,7 +55,12 @@ namespace GitReview.Controllers
                         var mergeBase = repo.Commits.FindMergeBase(sourceCommit, destinationCommit);
                         if (mergeBase == null)
                         {
+                            mergeBases.Add(rev, new Commit[0]);
                             continue;
+                        }
+                        else
+                        {
+                            mergeBases.Add(rev, new[] { mergeBase });
                         }
 
                         commits.Add(mergeBase);
@@ -82,12 +89,15 @@ namespace GitReview.Controllers
                             Id = review.Id + ":" + r.Id,
                             Source = r.Source.TargetIdentifier,
                             Destination = r.Destination.TargetIdentifier,
+                            MergeBases = mergeBases[r].Select(b => b.Sha).ToList(),
                         }).ToList(),
                         Commits = commits.Select(c => new
                         {
                             Id = c.Sha,
                             Author = c.Author.Email,
+                            AuthoredAt = c.Author.When,
                             Committer = c.Committer.Email,
+                            CommittedAt = c.Committer.When,
                             Message = c.Message,
                             Parents = c.Parents.Select(p => p.Sha).ToList(),
                         }).ToList(),
