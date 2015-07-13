@@ -4,5 +4,5 @@
     authoredAt: DS.attr('date'),
     committer: DS.belongsTo('person'),
     committedAt: DS.attr('date'),
-    parents: DS.hasMany('commit')
+    parents: DS.hasMany('commit', { inverse: null })
 });
