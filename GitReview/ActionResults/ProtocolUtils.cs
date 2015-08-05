@@ -348,7 +348,7 @@ namespace GitReview.ActionResults
                     return
                         this.sourceIdentifier == null ? "create " + this.canonicalName + " => " + this.targetIdentifier :
                         this.targetIdentifier == null ? "delete " + this.canonicalName + " (was " + this.sourceIdentifier + ")" :
-                        "delete " + this.canonicalName + " => " + this.targetIdentifier + " (was " + this.sourceIdentifier + ")";
+                        "update " + this.canonicalName + " => " + this.targetIdentifier + " (was " + this.sourceIdentifier + ")";
                 }
             }
         }
