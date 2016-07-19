@@ -6,13 +6,15 @@
 *.orig
 
 # Ignore all Visual Studio generated files.
-*.dbmdl
 *.sln.ide/
+.vs/
+*.dbmdl
 *.suo
 *.user
 *.ncb
 _ReSharper.*
 *.[Cc]ache
+_NCrunch*/
 *.ncrunch*
 *.docstates
 
