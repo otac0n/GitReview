@@ -143,6 +143,7 @@
     <Compile Include="ActionResults\ProtocolUtils.cs" />
     <Compile Include="ActionResults\ReceivePackResult.cs" />
     <Content Include="App\app.js" />
+    <Content Include="App\controllers\CommitGrid.js" />
     <Content Include="App\controllers\application.js" />
     <Content Include="App\models\Commit.js" />
     <Content Include="App\models\Person.js" />
@@ -150,6 +151,7 @@
     <Content Include="App\models\Revision.js" />
     <Content Include="App\router.js" />
     <Content Include="App\templates\application.hbs" />
+    <None Include="App\templates\commit-grid.hbs" />
     <Content Include="App\templates\index.hbs" />
     <Content Include="App\templates\review.hbs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -252,6 +254,7 @@
     <Compile Include="ReviewContext.cs" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\DagRenderer.js" />
     <Content Include="Scripts\Ember-1.13.2\ember.debug.js" />
     <Content Include="Scripts\Ember-1.13.2\ember.js" />
     <Content Include="Scripts\Ember-1.13.2\ember.min.js" />
@@ -273,10 +276,10 @@
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Scripts\moment.js" />
-    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

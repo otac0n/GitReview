@@ -1,1 +1,7 @@
-﻿
+﻿<ol>
+    {{#each rev in model.revisions}}
+    <li>
+        {{render "commit-grid" rev}}
+    </li>
+    {{/each}}
+</ol>

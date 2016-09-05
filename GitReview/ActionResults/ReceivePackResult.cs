@@ -166,7 +166,6 @@ namespace GitReview.ActionResults
                 RedirectStandardOutput = true,
                 StandardOutputEncoding = ProtocolUtils.DefaultEncoding,
                 UseShellExecute = false,
-                CreateNoWindow = true,
             };
 
             var output = new MemoryStream();
